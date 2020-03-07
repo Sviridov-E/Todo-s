@@ -1,0 +1,77 @@
+li {
+  position: relative;
+  left: 0;
+  display: flex;
+  background: white;
+  margin-bottom: 12px;
+  box-shadow: 3px 3px 6px 5px rgba(0,0,0,0.1);
+  border-radius: 3px;
+  transition: left .2s ease-in-out;
+}
+li .id{
+  position: relative;
+  line-height: 3rem;
+  width: 40px;
+  left: -55px;
+  color: #1c3c8e;
+  line-height: 3rem;
+  font-weight: bold;
+  font-size: 2.2rem;
+  text-align: right;
+  user-select: none;
+}
+li .listItem{
+  display: flex;
+  margin-left: -20px;
+  width: 100%;
+  height: 3rem;
+  z-index: 100;
+}
+li .title {
+  line-height: 3rem;
+  padding-left: 1rem;
+}
+.doneText {
+  text-decoration: line-through;
+}
+.doneLi {
+  opacity: .5;
+}
+li input {
+  height: 3rem;
+  width: 1rem;
+  margin: 0;
+}
+li .remove {
+  position: absolute;
+  right: 0;
+  height: 3rem;
+  width: 2rem;
+  font-size: 2rem;
+  border: none;
+  background: transparent;
+  color: #1c3c8e;
+  z-index: -95;
+  user-select: none;
+}
+li .remove:focus {
+  outline: none;
+}
+
+@media (max-width: 800px){
+  li .remove {
+    display:none;
+  }
+  li .id{
+    width: 30px;
+    left: 3px;
+    font-size: 1.6rem;
+    color: #999eac;
+  }
+  li .listItem {
+    margin-left: 10px;
+  }
+  li .title {
+    padding-left: .3rem;
+  }
+}

@@ -1,0 +1,43 @@
+.newTask {
+  display:flex;
+}
+.newTask button {
+  height: 3rem;
+  width: 6%;
+  border: 1px solid #6c8fe7;
+  border-left:none;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(to bottom, #90affe, #7fa0f5);
+  font-size: 3.5rem;
+  line-height: 3rem;
+  color: #597dd9;
+}
+.newTask button:focus {
+  outline: none;
+}
+.newTask input {
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: rgb(35,35,35);
+  display: block;
+  margin: 0 auto 2rem 0;
+  padding-left: 2rem;
+  width: 94%;
+  height: 3rem;
+  border: 1px solid #6c8fe7;
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+}
+.newTask input:focus{
+  outline: none;
+}
+.newTask input::placeholder{
+  color: rgba(48,48,47, .47);
+}
+
+@media (max-width: 800px) {
+  .newTask button {
+    width: 45px;
+  }
+}
