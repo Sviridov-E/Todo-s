@@ -6,7 +6,7 @@ li {
   margin-bottom: 12px;
   box-shadow: 3px 3px 6px 5px rgba(0,0,0,0.1);
   border-radius: 3px;
-  transition: left .2s ease-in-out;
+  transition: left .2s ease-in-out, opacity .2s linear;
 }
 li .id{
   position: relative;

@@ -3,32 +3,45 @@ import PropTypes from 'prop-types'
 import '../styles/listItem.css'
 
 function ListItem({task, id, toComplete, removeTask}){
-  let classes = [];
-  if(task.completed){
-    classes.push('doneText');
-    classes.push('doneLi');
-  }
+  const classes = [];
+  //Ref, for button-remover
+
+  const removeBtnRef = React.createRef();
+
   function showCloseBtn(event){
-    event.currentTarget.children[2].style.right = '-32px';
-    event.currentTarget.children[2].style.zIndex = '0';
+    removeBtnRef.current.style.right = '-32px';
+    removeBtnRef.current.style.zIndex = '0';
+    removeBtnRef.current.style.display = 'block';
   }
+
   function hideCloseBtn(event){
-    if(event.relatedTarget === event.currentTarget.children[2]) return;
-    event.currentTarget.children[2].style.right = '0';
-    event.currentTarget.children[2].style.zIndex = '-95';
+    if(event.relatedTarget === removeBtnRef.current) return;
+    removeBtnRef.current.style.right = '0';
+    removeBtnRef.current.style.zIndex = '-95';
+    removeBtnRef.current.style.display = 'none';
   }
+  //////////////////////////
+  //Ref, for remove todo
+  const todo = React.createRef();
   function animationRemove(event){
-    event.target.parentElement.style.left = '-2000px';
+    todo.current.style.left = '-2000px';
     setTimeout(()=>removeTask(task.id), 200);
   }
-  return (<li className={classes[1]} onMouseEnter={showCloseBtn} onMouseLeave={hideCloseBtn}>
+  //////////////////////////
+  if(task.completed){
+    //Line throuth text
+    classes.push('doneText');
+    //Degrease opacity for element
+    classes.push('doneLi');
+  }
+  return (<li className={classes[1]} ref={todo} onMouseEnter={showCloseBtn} onMouseLeave={hideCloseBtn}>
     <p className="id">{id+1}</p>
     <div className="listItem">
       <input type="checkbox" onChange={(event)=>toComplete(task.id, event.target.checked)}/>
       &nbsp;
       <p className={['title', classes[0]].join(' ')}>{task.title}</p>
     </div>
-    <button className='remove' onClick={animationRemove}>x</button>
+    <button className='remove' ref={removeBtnRef} onClick={animationRemove}>x</button>
   </li>);
 }
 ListItem.propTypes = {
