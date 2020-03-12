@@ -5,7 +5,7 @@ import logo from './img/logo.png'
 import './styles/App.css'
 
 function App() {
-  const [tasks, setTask] = useState([]);
+  const [tasks, setTask] = useState([{id: 0, title: 'Помыть жопу', completed: false}]);
   function removeTask(id){
     setTask(
       tasks.filter(task=>{
@@ -25,8 +25,10 @@ function App() {
     );
   }
   function createTask(value){
+    
     let firstLetter = value.slice(0,1).toUpperCase();
     value = firstLetter + value.slice(1);
+
     setTask(
       tasks.concat({id: tasks.length, title: value, completed: false})
     );

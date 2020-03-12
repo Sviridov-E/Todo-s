@@ -1,12 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import '../styles/listItem.css'
+import ellipsis from '../img/ellipsis.svg'
+//import dragRemove from '../animations/dnd_remove.js'
 
 function ListItem({task, id, toComplete, removeTask}){
   const classes = [];
   //Ref, for button-remover
 
   const removeBtnRef = React.createRef();
+
+  //Ref, for Drag-n-Drop
+
+  const todo = React.createRef();
+  function dragRemove(element){
+    console.log(element);
+    document.addEventListener('touchstart', (e)=>{
+      console.log(element);
+      if(e.target !== element) return;
+      alert(e.target);
+    })
+  }
+  dragRemove(todo.current);
 
   function showCloseBtn(event){
     removeBtnRef.current.style.right = '-32px';
@@ -22,7 +37,6 @@ function ListItem({task, id, toComplete, removeTask}){
   }
   //////////////////////////
   //Ref, for remove todo
-  const todo = React.createRef();
   function animationRemove(event){
     todo.current.style.left = '-2000px';
     setTimeout(()=>removeTask(task.id), 200);
@@ -40,6 +54,9 @@ function ListItem({task, id, toComplete, removeTask}){
       <input type="checkbox" onChange={(event)=>toComplete(task.id, event.target.checked)}/>
       &nbsp;
       <p className={['title', classes[0]].join(' ')}>{task.title}</p>
+      <div className="ellipsis">
+        <img alt="ellipsis" src={ellipsis}></img>
+      </div>
     </div>
     <button className='remove' ref={removeBtnRef} onClick={animationRemove}>x</button>
   </li>);

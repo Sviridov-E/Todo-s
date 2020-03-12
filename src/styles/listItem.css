@@ -27,6 +27,19 @@ li .listItem{
   height: 3rem;
   z-index: 100;
 }
+li .listItem .ellipsis {
+  width: 5%;
+  height: 100%;
+  padding-top: .85%;
+  position: absolute;
+  right: 0px;
+  text-align: center;
+  box-sizing: border-box;
+
+}
+li .listItem .ellipsis img {
+  height: 80%;
+}
 li .title {
   line-height: 3rem;
   padding-left: 1rem;
@@ -70,6 +83,10 @@ li .remove:focus {
   }
   li .listItem {
     margin-left: 10px;
+  }
+  li .listItem .ellipsis {
+    width: 10%;
+    padding-top: 2%;
   }
   li .title {
     padding-left: .3rem;
