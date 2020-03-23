@@ -67,9 +67,10 @@ body{
   justify-content: center;
   margin-top: 4rem;
 }
-@media (max-width: 800px) {
+@media (max-width: 600px) {
 	.logo img {
 		display: block;
 		width: 50%;
+		height: 50%;
 	}
 }

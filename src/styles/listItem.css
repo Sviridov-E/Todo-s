@@ -1,12 +1,12 @@
 li {
   position: relative;
-  left: 0;
   display: flex;
   background: white;
   margin-bottom: 12px;
   box-shadow: 3px 3px 6px 5px rgba(0,0,0,0.1);
   border-radius: 3px;
-  transition: left .2s ease-in-out, opacity .2s linear;
+  opacity: 1;
+  transition: transform .2s ease-in-out, opacity .1s linear;
 }
 li .id{
   position: relative;
@@ -28,17 +28,20 @@ li .listItem{
   z-index: 100;
 }
 li .listItem .ellipsis {
+  display:flex;
+  align-items: center;
+  justify-content: center;
   width: 5%;
+  min-width: 30px;
   height: 100%;
-  padding-top: .85%;
   position: absolute;
   right: 0px;
-  text-align: center;
   box-sizing: border-box;
 
 }
 li .listItem .ellipsis img {
-  height: 80%;
+  height: 60%;
+  opacity: .4;
 }
 li .title {
   line-height: 3rem;
@@ -72,6 +75,9 @@ li .remove:focus {
 }
 
 @media (max-width: 800px){
+  li {
+    transition: inherit;
+  }
   li .remove {
     display:none;
   }
@@ -83,12 +89,5 @@ li .remove:focus {
   }
   li .listItem {
     margin-left: 10px;
-  }
-  li .listItem .ellipsis {
-    width: 10%;
-    padding-top: 2%;
-  }
-  li .title {
-    padding-left: .3rem;
   }
 }

@@ -5,7 +5,8 @@ import logo from './img/logo.png'
 import './styles/App.css'
 
 function App() {
-  const [tasks, setTask] = useState([{id: 0, title: 'Помыть жопу', completed: false}]);
+  const [tasks, setTask] = useState([]);
+  const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
   function removeTask(id){
     setTask(
       tasks.filter(task=>{
@@ -30,8 +31,9 @@ function App() {
     value = firstLetter + value.slice(1);
 
     setTask(
-      tasks.concat({id: tasks.length, title: value, completed: false})
+      tasks.concat({id: numOfLastTask+1, title: value, completed: false})
     );
+    setNumOfLastTask(numOfLastTask+1);
   }
   return (
     <div className='main'>
