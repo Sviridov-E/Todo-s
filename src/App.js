@@ -7,6 +7,25 @@ import './styles/App.css'
 function App() {
   const [tasks, setTask] = useState([]);
   const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
+  function reorder(source, destination){
+    const sourceInd = tasks.indexOf(source),
+          destInd = tasks.indexOf(destination);
+    if(sourceInd === destInd) return;
+    if(sourceInd > destInd){
+      let newTasks = tasks.slice(0, destInd);
+      newTasks.push(source);
+      newTasks.push(...tasks.slice(destInd, sourceInd));
+      newTasks.push(...tasks.slice(sourceInd+1));
+      setTask(newTasks);
+    }
+    else {
+      let newTasks = tasks.slice(0, sourceInd);
+      newTasks.push(...tasks.slice(sourceInd+1, destInd+1));
+      newTasks.push(source);
+      newTasks.push(...tasks.slice(destInd+1));
+      setTask(newTasks);
+    }
+  }
   function removeTask(id){
     setTask(
       tasks.filter(task=>{
