@@ -17,7 +17,8 @@ class ListItem extends React.Component {
   }
   componentDidMount(){
     horizontalDragging(this.todo.current, () => this.props.removeTask(this.props.task.id));
-    verticalDragging(this.todo.current, '#ellipsis', this.props.reorder);;
+    this.isMobile = document.documentElement.clientWidth <= 800 ? true : false;
+    verticalDragging(this.todo.current, '#ellipsis', this.props.reorder, this.isMobile);
   }
   componentWillMount(){
     this.classes = [];
@@ -38,7 +39,7 @@ class ListItem extends React.Component {
     }
   }
   showCloseBtn(){
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (this.isMobile) {
       return;
     }
     this.removeBtnRef.current.style.right = '-32px';
@@ -46,7 +47,7 @@ class ListItem extends React.Component {
     this.removeBtnRef.current.style.display = 'block';
   }
   hideCloseBtn(event){
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (this.isMobile) {
       return;
     }
     if(event.relatedTarget === this.removeBtnRef.current) return;

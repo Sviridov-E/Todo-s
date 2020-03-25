@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import NewTask from './modules/newTask'
 import TaskList from './modules/taskList'
 import logo from './img/logo.png'
@@ -9,31 +9,23 @@ function App() {
   const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
   function reorder(sourceInd, offset){
     setTask(tasks => {
+      offset = offset > tasks.length ? tasks.length -1 : offset;
+      offset = -offset > tasks.length ? -tasks.length +1 : offset;
       const source = tasks[sourceInd],
-            destInd = +sourceInd+offset,
-            destination = tasks[destInd];
-            console.log('sourceInd', sourceInd);
-            console.log('destInd', destInd);
-            console.log('source', source);
-            console.log('destination', destination);
-            console.log(tasks);
-            
-            
-      if(!source || !destination) return;
-      if(sourceInd !== -1 && destInd !== -1 && sourceInd === destInd) return
+            destInd = sourceInd+offset;
       if(sourceInd > destInd){
         let newTasks = tasks.slice(0, destInd);
         newTasks.push(source);
         newTasks.push(...tasks.slice(destInd, sourceInd));
         newTasks.push(...tasks.slice(sourceInd+1));
-        setTask(newTasks);
+        return newTasks;
       }
       else {
         let newTasks = tasks.slice(0, sourceInd);
         newTasks.push(...tasks.slice(sourceInd+1, destInd+1));
         newTasks.push(source);
         newTasks.push(...tasks.slice(destInd+1));
-        setTask(newTasks);
+        return newTasks;
       }
     });
   }
