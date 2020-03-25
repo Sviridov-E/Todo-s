@@ -1,5 +1,6 @@
 function horizontalDragging(element, handlerRemove){
   element.addEventListener('touchstart', event => {
+    console.log('click!');
     function whenMove(event){
       touchOffset = event.touches[0].pageX - touchCoord;
       element.style.transform = `translateX(${touchOffset}px)`;

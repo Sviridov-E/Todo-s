@@ -1,30 +1,41 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import NewTask from './modules/newTask'
 import TaskList from './modules/taskList'
 import logo from './img/logo.png'
 import './styles/App.css'
 
 function App() {
-  const [tasks, setTask] = useState([]);
+  const [tasks, setTask] = useState([{id: 0, title: '1Сходить в магазин', completed: false},{id: 1, title: '2Погулять с собакой', completed: false},{id: 2, title: '3Приготовить завтрак', completed: false}]);
   const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
-  function reorder(source, destination){
-    const sourceInd = tasks.indexOf(source),
-          destInd = tasks.indexOf(destination);
-    if(sourceInd === destInd) return;
-    if(sourceInd > destInd){
-      let newTasks = tasks.slice(0, destInd);
-      newTasks.push(source);
-      newTasks.push(...tasks.slice(destInd, sourceInd));
-      newTasks.push(...tasks.slice(sourceInd+1));
-      setTask(newTasks);
-    }
-    else {
-      let newTasks = tasks.slice(0, sourceInd);
-      newTasks.push(...tasks.slice(sourceInd+1, destInd+1));
-      newTasks.push(source);
-      newTasks.push(...tasks.slice(destInd+1));
-      setTask(newTasks);
-    }
+  function reorder(sourceInd, offset){
+    setTask(tasks => {
+      const source = tasks[sourceInd],
+            destInd = +sourceInd+offset,
+            destination = tasks[destInd];
+            console.log('sourceInd', sourceInd);
+            console.log('destInd', destInd);
+            console.log('source', source);
+            console.log('destination', destination);
+            console.log(tasks);
+            
+            
+      if(!source || !destination) return;
+      if(sourceInd !== -1 && destInd !== -1 && sourceInd === destInd) return
+      if(sourceInd > destInd){
+        let newTasks = tasks.slice(0, destInd);
+        newTasks.push(source);
+        newTasks.push(...tasks.slice(destInd, sourceInd));
+        newTasks.push(...tasks.slice(sourceInd+1));
+        setTask(newTasks);
+      }
+      else {
+        let newTasks = tasks.slice(0, sourceInd);
+        newTasks.push(...tasks.slice(sourceInd+1, destInd+1));
+        newTasks.push(source);
+        newTasks.push(...tasks.slice(destInd+1));
+        setTask(newTasks);
+      }
+    });
   }
   function removeTask(id){
     setTask(
@@ -61,7 +72,7 @@ function App() {
       </div>
       <div className='app'>
         <NewTask createTask={createTask}/>
-        <TaskList tasks={tasks} toComplete={markAsComplete} removeTask={removeTask}/>
+        <TaskList reorder={reorder} tasks={tasks} toComplete={markAsComplete} removeTask={removeTask}/>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/listItem.css'
 import ellipsis from '../img/ellipsis.svg'
 import horizontalDragging from './animations/horizontalDragging'
+import verticalDragging from './animations/verticalDragging'
 
 class ListItem extends React.Component {
   constructor(props){
@@ -16,6 +17,7 @@ class ListItem extends React.Component {
   }
   componentDidMount(){
     horizontalDragging(this.todo.current, () => this.props.removeTask(this.props.task.id));
+    verticalDragging(this.todo.current, '#ellipsis', this.props.reorder);;
   }
   componentWillMount(){
     this.classes = [];
@@ -61,12 +63,12 @@ class ListItem extends React.Component {
     const task = this.props.task;
     const id = this.props.id;
     return (
-      <li className = {this.classes[1]} ref={this.todo} onDragStart={e=>e.preventDefault()}onMouseEnter={this.showCloseBtn} onMouseLeave={this.hideCloseBtn}>
+      <li className = {this.classes[1]} id={this.props.id} ref={this.todo} onDragStart={e=>e.preventDefault()}onMouseEnter={this.showCloseBtn} onMouseLeave={this.hideCloseBtn}>
         <p className="id">{id+1}</p>
         <div className="listItem">
           <input type="checkbox" checked={task.completed} onChange={(event)=>this.props.toComplete(task.id, event.target.checked)}/>
           <p className={['title', this.classes[0]].join(' ')}>{task.title}</p>
-          <div className="ellipsis">
+          <div className="ellipsis" id="ellipsis">
             <img alt="ellipsis" src={ellipsis}></img>
           </div>
         </div>

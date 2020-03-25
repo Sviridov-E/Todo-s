@@ -1,3 +1,6 @@
+.noneTransition {
+  transition: none;
+}
 li {
   position: relative;
   display: flex;
