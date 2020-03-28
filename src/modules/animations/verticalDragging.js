@@ -25,7 +25,7 @@ function verticalDragging(source, clickTarget, handler, isMobile = false){
   }
   else {
     source.addEventListener('touchstart', event => {
-      if(event.touches[0].target.closest(clickTarget) !== source.querySelectorAll(clickTarget)[0]) {alert('!');return;};
+      if(event.touches[0].target.closest(clickTarget) !== source.querySelectorAll(clickTarget)[0]) return;
       source.classList.add('noneTransition');
       function whenMove(event){
         clickOffset = event.touches[0].pageY - clickCoord;

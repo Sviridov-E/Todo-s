@@ -8,9 +8,10 @@ function App() {
   const [tasks, setTask] = useState([{id: 0, title: '1Сходить в магазин', completed: false},{id: 1, title: '2Погулять с собакой', completed: false},{id: 2, title: '3Приготовить завтрак', completed: false}]);
   const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
   function reorder(sourceInd, offset){
+
     setTask(tasks => {
       offset = offset > tasks.length ? tasks.length -1 : offset;
-      offset = -offset > tasks.length ? -tasks.length +1 : offset;
+      offset = sourceInd + offset < 0 ? -sourceInd : offset;
       const source = tasks[sourceInd],
             destInd = sourceInd+offset;
       if(sourceInd > destInd){
