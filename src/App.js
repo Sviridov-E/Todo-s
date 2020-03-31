@@ -1,14 +1,30 @@
 import React, {useState} from 'react'
 import NewTask from './modules/newTask'
 import TaskList from './modules/taskList'
+import Filter from './modules/filter'
 import logo from './img/logo.png'
 import './styles/App.css'
 
 function App() {
-  const [tasks, setTask] = useState([{id: 0, title: '1Сходить в магазин', completed: false},{id: 1, title: '2Погулять с собакой', completed: false},{id: 2, title: '3Приготовить завтрак', completed: false}]);
+  const [tasks, setTask] = useState([{id: 0, title: 'Сходить в магазин', completed: false},{id: 1, title: 'Погулять с собакой', completed: false},{id: 2, title: 'Приготовить завтрак', completed: false}, {id: 3, title: 'Сходить в спортзал', completed: false},{id: 4, title: 'Поиграть с котом', completed: false},{id: 5, title: 'Приготовить ужин', completed: false}]);
   const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
-  function reorder(sourceInd, offset){
+  const [filter, setFilter] = useState('all');
 
+  // Object with filtering methods for passing to the task list
+  const filterTasks = {
+    all(tasks){
+      return tasks;
+    },
+    active(tasks){
+      return tasks.filter(task => !task.completed);
+    },
+    completed(tasks){
+      return tasks.filter(task => task.completed);
+    }
+  };
+
+  // Sorting function. Takes a source index and offset. Return new array of tasks.
+  function reorder(sourceInd, offset){
     setTask(tasks => {
       offset = offset > tasks.length ? tasks.length -1 : offset;
       offset = sourceInd + offset < 0 ? -sourceInd : offset;
@@ -30,6 +46,9 @@ function App() {
       }
     });
   }
+  function changeFilter(value){
+    setFilter(value);
+  }
   function removeTask(id){
     setTask(
       tasks.filter(task=>{
@@ -49,10 +68,8 @@ function App() {
     );
   }
   function createTask(value){
-    
     let firstLetter = value.slice(0,1).toUpperCase();
     value = firstLetter + value.slice(1);
-
     setTask(
       tasks.concat({id: numOfLastTask+1, title: value, completed: false})
     );
@@ -65,7 +82,8 @@ function App() {
       </div>
       <div className='app'>
         <NewTask createTask={createTask}/>
-        <TaskList reorder={reorder} tasks={tasks} toComplete={markAsComplete} removeTask={removeTask}/>
+        <TaskList reorder={reorder} tasks={filterTasks[filter](tasks)} toComplete={markAsComplete} removeTask={removeTask}/>
+        <Filter changeFilter={changeFilter} filter={filter}/>
       </div>
     </div>
   );

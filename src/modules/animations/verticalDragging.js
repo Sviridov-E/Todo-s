@@ -10,10 +10,10 @@ function verticalDragging(source, clickTarget, handler, isMobile = false){
       }
       function whenUp(){
         document.removeEventListener('mousemove', whenMove);
-        elementOffset = clickOffset/heightElement >= 0 ? Math.floor(clickOffset/heightElement) : Math.ceil(clickOffset/heightElement);
+        elementOffset = clickOffset/heightElement >= 0 ? Math.floor(clickOffset/(heightElement+10)) : Math.ceil(clickOffset/(heightElement+10));
         source.style.transform = null;
         source.classList.remove('noneTransition');
-        handler(+source.id, elementOffset);
+        elementOffset && handler(+source.id, elementOffset);
         document.removeEventListener('mouseup', whenUp);
       }
       const clickCoord = event.pageY;
@@ -33,10 +33,10 @@ function verticalDragging(source, clickTarget, handler, isMobile = false){
       }
       function whenUp(){
         document.removeEventListener('touchmove', whenMove);
-        elementOffset = clickOffset/heightElement >= 0 ? Math.floor(clickOffset/heightElement) : Math.ceil(clickOffset/heightElement);
+        elementOffset = clickOffset/heightElement >= 0 ? Math.floor(clickOffset/(heightElement+10)) : Math.ceil(clickOffset/(heightElement+10));
         source.style.transform = null;
         source.classList.remove('noneTransition');
-        handler(+source.id, elementOffset);
+        elementOffset && handler(+source.id, elementOffset);
         document.removeEventListener('touchend', whenUp);
       }
       const clickCoord = event.touches[0].pageY;

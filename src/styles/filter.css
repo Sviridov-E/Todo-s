@@ -1,0 +1,26 @@
+.filter {
+  cursor: initial;
+}
+.filter button {
+  padding: 5px 10px;
+  border: none;
+  outline: none;
+  background: RGBA(249, 250, 253, .8);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #474747;
+  cursor: pointer;
+}
+.filter button:hover {
+  background: RGBA(249, 250, 253, .9);
+}
+.filter button.filterActive {
+  background: #52ac66;
+  color: #f3f3f3;
+}
+.filter :first-of-type {
+  border-radius: 7px 0 0 7px;
+}
+.filter :last-of-type {
+  border-radius: 0 7px 7px 0;
+}
