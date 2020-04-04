@@ -49,8 +49,8 @@ table {
 /**************************************/
 /****************MAIN******************/
 html {
-	background: linear-gradient(to right, #3152a6, #3f65c8, #3152a6);
-	 font-family: 'Roboto', 'Arial', sans-serif;
+	background:linear-gradient(90deg, #6f86d6 0%, #5ba5e2 50%, #6f86d6 100% );
+	font-family: 'Roboto', 'Arial', sans-serif;
 }
 body{
   display: flex;
@@ -73,4 +73,22 @@ body{
 		width: 50%;
 		height: 50%;
 	}
+}
+.footer {
+	display: flex;
+	justify-content: space-between;
+}
+.footer .removeButton {
+	padding: 5px 10px;
+  border: none;
+	outline: none;
+	border-radius: 7px;
+  background: RGBA(249, 250, 253, .8);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #474747;
+  cursor: pointer;
+}
+.footer .removeButton:hover {
+	background: rgba(248, 226, 231, 1);
 }

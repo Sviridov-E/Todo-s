@@ -69,9 +69,12 @@ class ListItem extends React.Component {
         <div className="listItem">
           <input type="checkbox" checked={task.completed} onChange={(event)=>this.props.toComplete(task.id, event.target.checked)}/>
           <p className={['title', this.classes[0]].join(' ')}>{task.title}</p>
-          <div className="ellipsis" id="ellipsis">
+          {
+            this.props.shouldReordering ? 
+            (<div className="ellipsis" id="ellipsis">
             <img alt="ellipsis" src={ellipsis}></img>
-          </div>
+            </div>) : null
+          }
         </div>
         <button className="remove" ref={this.removeBtnRef} onClick={this.animationRemove}>x</button>
       </li>

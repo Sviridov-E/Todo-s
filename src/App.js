@@ -56,6 +56,10 @@ function App() {
       })
     );
   }
+  function removeCompleted(){
+    setTask(tasks => tasks.filter(task => !task.completed)
+    );
+  }
   function markAsComplete(id, value){
     setTask(
       tasks.map(task => {
@@ -82,8 +86,11 @@ function App() {
       </div>
       <div className='app'>
         <NewTask createTask={createTask}/>
-        <TaskList reorder={reorder} tasks={filterTasks[filter](tasks)} toComplete={markAsComplete} removeTask={removeTask}/>
-        <Filter changeFilter={changeFilter} filter={filter}/>
+        <TaskList reorder={reorder} shouldReordering={filter === 'all' ? true : false} tasks={filterTasks[filter](tasks)} toComplete={markAsComplete} removeTask={removeTask}/>
+        <div className='footer'>
+          <Filter changeFilter={changeFilter} filter={filter}/>
+          <button onClick={removeCompleted} className='removeButton'>Remove Completed</button>
+        </div>
       </div>
     </div>
   );
