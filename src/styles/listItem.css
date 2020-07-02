@@ -66,12 +66,11 @@ li .remove {
   right: 0;
   height: 3rem;
   width: 2rem;
-  font-size: 2rem;
   border: none;
   background: transparent;
-  color: #1c3c8e;
   z-index: -95;
   user-select: none;
+  cursor: pointer;
 }
 li .remove:focus {
   outline: none;

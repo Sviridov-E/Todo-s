@@ -3,6 +3,7 @@ import '../styles/listItem.css'
 import ellipsis from '../img/ellipsis.svg'
 import horizontalDragging from './animations/horizontalDragging'
 import verticalDragging from './animations/verticalDragging'
+import trash from '../img/trash.svg'
 
 class ListItem extends React.Component {
   constructor(props){
@@ -76,7 +77,7 @@ class ListItem extends React.Component {
             </div>) : null
           }
         </div>
-        <button className="remove" ref={this.removeBtnRef} onClick={this.animationRemove}>x</button>
+        <button className="remove" ref={this.removeBtnRef} onClick={this.animationRemove}><img alt='del' src={trash}/></button>
       </li>
     );
   }
