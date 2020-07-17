@@ -10,7 +10,7 @@ class ListItem extends React.Component {
     super(props);
     this.todo = React.createRef();
     this.removeBtnRef = React.createRef();
-    this.classes = []; // for stylization completed tasks
+
 
     this.showCloseBtn = this.showCloseBtn.bind(this);
     this.hideCloseBtn = this.hideCloseBtn.bind(this);
@@ -20,24 +20,6 @@ class ListItem extends React.Component {
     horizontalDragging(this.todo.current, () => this.props.removeTask(this.props.task.id));
     this.isMobile = document.documentElement.clientWidth <= 800 ? true : false;
     verticalDragging(this.todo.current, '#ellipsis', this.props.reorder, this.isMobile);
-  }
-  componentWillMount(){
-    this.classes = [];
-    if(this.props.task.completed){
-      //Line throuth text
-      this.classes.push('doneText');
-      //Degrease opacity for element
-      this.classes.push('doneLi');
-    }
-  }
-  componentWillUpdate(){
-    this.classes = [];
-    if(this.props.task.completed){
-      //Line throuth text
-      this.classes.push('doneText');
-      //Degrease opacity for element
-      this.classes.push('doneLi');
-    }
   }
   showCloseBtn(){
     if (this.isMobile) {
@@ -64,12 +46,13 @@ class ListItem extends React.Component {
   render(){
     const task = this.props.task;
     const id = this.props.id;
+    const completed = this.props.task.completed;
     return (
-      <li className = {this.classes[1]} id={this.props.id} ref={this.todo} onDragStart={e=>e.preventDefault()}onMouseEnter={this.showCloseBtn} onMouseLeave={this.hideCloseBtn}>
+      <li className = {completed ? 'doneLi' : ''} id={this.props.id} ref={this.todo} onDragStart={e=>e.preventDefault()} onMouseEnter={this.showCloseBtn} onMouseLeave={this.hideCloseBtn}>
         <p className="id">{id+1}</p>
         <div className="listItem">
-          <input type="checkbox" checked={task.completed} onChange={(event)=>this.props.toComplete(task.id, event.target.checked)}/>
-          <p className={['title', this.classes[0]].join(' ')}>{task.title}</p>
+          <input type="checkbox" checked={completed} onChange={(event)=>this.props.toComplete(task.id, event.target.checked)}/>
+          <p className={completed ? 'title doneText' : 'title'}>{task.title}</p>
           {
             this.props.shouldReordering ? 
             (<div className="ellipsis" id="ellipsis">

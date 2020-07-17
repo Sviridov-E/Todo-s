@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import NewTask from './modules/newTask'
+import NewTask from './modules/NewTask'
 import TaskList from './modules/taskList'
-import Filter from './modules/filter'
+import Filter from './modules/Filter'
 import logo from './img/logo.png'
 import './styles/App.css'
 
 function App() {
   const [tasks, setTask] = useState([]);
-  const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
   const [filter, setFilter] = useState('all');
 
   // Object with filtering methods for passing to the task list
@@ -28,16 +27,12 @@ function App() {
   useEffect(() => {
     if(firstChange){
       setFirstChange(false);
-      console.log('first change');
       let LStasks = localStorage.getItem('tasks');
       if(!LStasks) return;
       LStasks = JSON.parse(LStasks);
       setTask(LStasks);
-      setNumOfLastTask(LStasks.length-1);
 
     } else {
-      console.log('second change');
-      
       localStorage.setItem('tasks', JSON.stringify(tasks));
     }
   }, [tasks, firstChange]);
@@ -93,9 +88,8 @@ function App() {
     let firstLetter = value.slice(0,1).toUpperCase();
     value = firstLetter + value.slice(1);
     setTask(
-      tasks.concat({id: numOfLastTask+1, title: value, completed: false})
+      tasks.concat({id: +new Date(), title: value, completed: false})
     );
-    setNumOfLastTask(numOfLastTask+1);
   }
   return (
     <div className='main'>

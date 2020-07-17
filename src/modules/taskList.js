@@ -1,5 +1,5 @@
 import React from 'react'
-import ListItem from './listItem_class'
+import ListItem from './ListItem'
 
 function TaskList(props){
   const mesEmptyStyle = {
@@ -16,7 +16,17 @@ function TaskList(props){
   return(
     <ul className="item-list" style={{listStyle: 'none', width: '100%', margin: '0 auto'}}>
       {tasks[0] ? tasks.map((task, id) => {
-        return <ListItem shouldReordering={props.shouldReordering}reorder={props.reorder}toComplete={props.toComplete} removeTask={props.removeTask} key={task.id} task={task} id={id}/>
+        return (
+          <ListItem 
+            shouldReordering={props.shouldReordering}
+            reorder={props.reorder} 
+            toComplete={props.toComplete} 
+            removeTask={props.removeTask} 
+            key={task.id} 
+            task={task} 
+            id={id}
+          />
+        )
       }) : mesIfEmpty}
     </ul>
   );
