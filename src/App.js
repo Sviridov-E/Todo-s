@@ -101,7 +101,9 @@ function App() {
         <TaskList reorder={reorder} shouldReordering={filter === 'all' ? true : false} tasks={filterTasks[filter](tasks)} toComplete={markAsComplete} removeTask={removeTask}/>
         <div className='footer'>
           <Filter changeFilter={changeFilter} filter={filter}/>
-          <button onClick={removeCompleted} className='removeButton'>Удалить выполненные</button>
+          <div className='remove-button'>
+            <button onClick={removeCompleted}>Удалить выполненные</button>
+          </div>
         </div>
       </div>
     </div>

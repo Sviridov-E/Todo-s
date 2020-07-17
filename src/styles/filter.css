@@ -24,3 +24,21 @@
 .filter :last-of-type {
   border-radius: 0 7px 7px 0;
 }
+
+@media (max-width: 800px) {
+  .footer .filter {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer .remove-button {
+    display: flex;
+    align-items: center;
+    margin-right: 4%;
+  }
+  .footer .filter :first-of-type {
+    border-radius: 7px 7px 0 0;
+  }
+  .footer .filter :last-of-type {
+    border-radius: 0 0 7px 7px;
+  }
+}

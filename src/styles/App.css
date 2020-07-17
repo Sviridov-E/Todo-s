@@ -23,6 +23,9 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+html {
+	overflow-y: scroll;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -67,18 +70,12 @@ body{
   justify-content: center;
   margin-top: 4rem;
 }
-@media (max-width: 600px) {
-	.logo img {
-		display: block;
-		width: 50%;
-		height: 50%;
-	}
-}
+
 .footer {
 	display: flex;
 	justify-content: space-between;
 }
-.footer .removeButton {
+.footer .remove-button button {
 	padding: 5px 10px;
   border: none;
 	outline: none;
@@ -89,6 +86,22 @@ body{
   color: #474747;
   cursor: pointer;
 }
-.footer .removeButton:hover {
+.footer .remove-button button:hover {
 	background: rgba(248, 226, 231, 1);
+}
+@media (max-width: 800px) {
+	.logo img {
+		display: block;
+		width: 50%;
+		height: 50%;
+	}
+	.footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100vw;
+		background: linear-gradient(90deg, #6379c0f3 0%, #5194cbf3 50%, #6378c0f3 100% );
+		padding: 10px;
+		z-index: 100;
+	}
 }
