@@ -75,7 +75,9 @@ li .remove {
 li .remove:focus {
   outline: none;
 }
-
+.item-list .empty-list {
+  margin-bottom: 3rem;
+}
 @media (max-width: 800px){
   li {
     transition: inherit;

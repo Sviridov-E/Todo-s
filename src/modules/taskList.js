@@ -12,9 +12,9 @@ function TaskList(props){
     userSelect: 'none',
   };
   const tasks = props.tasks;
-  const mesIfEmpty = <h2 style={mesEmptyStyle}>У вас нет заданий</h2>;
+  const mesIfEmpty = <h2 className="empty-list" style={mesEmptyStyle}>У вас нет заданий</h2>;
   return(
-    <ul style={{listStyle: 'none', width: '100%', margin: '0 auto'}}>
+    <ul className="item-list" style={{listStyle: 'none', width: '100%', margin: '0 auto'}}>
       {tasks[0] ? tasks.map((task, id) => {
         return <ListItem shouldReordering={props.shouldReordering}reorder={props.reorder}toComplete={props.toComplete} removeTask={props.removeTask} key={task.id} task={task} id={id}/>
       }) : mesIfEmpty}

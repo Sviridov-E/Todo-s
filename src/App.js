@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import NewTask from './modules/newTask'
 import TaskList from './modules/taskList'
 import Filter from './modules/filter'
@@ -6,7 +6,7 @@ import logo from './img/logo.png'
 import './styles/App.css'
 
 function App() {
-  const [tasks, setTask] = useState([{id: 0, title: 'Сходить в магазин', completed: false},{id: 1, title: 'Погулять с собакой', completed: false},{id: 2, title: 'Приготовить завтрак', completed: false}, {id: 3, title: 'Сходить в спортзал', completed: false},{id: 4, title: 'Поиграть с котом', completed: false},{id: 5, title: 'Приготовить ужин', completed: false}]);
+  const [tasks, setTask] = useState([]);
   const [numOfLastTask, setNumOfLastTask] = useState(tasks.length-1); // for correct keys in tasks
   const [filter, setFilter] = useState('all');
 
@@ -23,6 +23,24 @@ function App() {
     }
   };
 
+  const [firstChange, setFirstChange] = useState(true);
+
+  useEffect(() => {
+    if(firstChange){
+      setFirstChange(false);
+      console.log('first change');
+      let LStasks = localStorage.getItem('tasks');
+      if(!LStasks) return;
+      LStasks = JSON.parse(LStasks);
+      setTask(LStasks);
+      setNumOfLastTask(LStasks.length-1);
+
+    } else {
+      console.log('second change');
+      
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }, [tasks, firstChange]);
   // Sorting function. Takes a source index and offset. Return new array of tasks.
   function reorder(sourceInd, offset){
     setTask(tasks => {
@@ -89,7 +107,7 @@ function App() {
         <TaskList reorder={reorder} shouldReordering={filter === 'all' ? true : false} tasks={filterTasks[filter](tasks)} toComplete={markAsComplete} removeTask={removeTask}/>
         <div className='footer'>
           <Filter changeFilter={changeFilter} filter={filter}/>
-          <button onClick={removeCompleted} className='removeButton'>Remove Completed</button>
+          <button onClick={removeCompleted} className='removeButton'>Удалить выполненные</button>
         </div>
       </div>
     </div>
